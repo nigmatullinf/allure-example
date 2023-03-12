@@ -1,6 +1,6 @@
 plugins {
     java
-    id("io.qameta.allure") version "2.9.4"
+    id("io.qameta.allure") version "2.9.5"
 }
 
 group = "io.eroshenkoam"

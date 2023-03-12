@@ -18,8 +18,8 @@ public class IssuesRestTest {
     @TM4J("AE-T1")
     @Story("Create new issue")
     @Microservice("Billing")
-    @Tags({@Tag("api"), @Tag("smoke")})
-    @ParameterizedTest(name = "Create issue via api")
+    @Tags({@Tag("api"), @Tag("smoke4")})
+    @ParameterizedTest(name = "Create issue via api {0}")
     @ValueSource(strings = {"First Note", "Second Note"})
     public void shouldCreateUserNote(@Param(value = "Title") String title) {
         steps.createIssueWithTitle(OWNER, REPO, title);
@@ -29,7 +29,7 @@ public class IssuesRestTest {
     @TM4J("AE-T2")
     @Story("Close existing issue")
     @Microservice("Repository")
-    @Tags({@Tag("web"), @Tag("regress")})
+    @Tags({@Tag("web"), @Tag("regress4")})
     @JiraIssues({@JiraIssue("AE-1")})
     @ParameterizedTest(name = "Close issue via api")
     @ValueSource(strings = {"First Note", "Second Note"})
