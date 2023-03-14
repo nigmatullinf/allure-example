@@ -15,6 +15,9 @@ on:
       ALLURE_JOB_RUN_ID:
         description: "Inner parameter for Allure TestOps"
         required: false
+      ALLURE_USERNAME:
+        description: "Allure service parameter, leave blank"
+        required: false
 
 env:
   ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
@@ -46,7 +49,7 @@ jobs:
             return `${context.repo.owner}/${context.repo.repo}/actions/workflows/${result.data.workflow_id}`
       - name: Download allurectl
         run: |
-          wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_386 -O ./allurectl
+          wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
           chmod +x ./allurectl
       - name: Prepare TestPlan
         run: ./allurectl job-run plan --output-file ${ALLURE_TESTPLAN_PATH}
@@ -59,6 +62,8 @@ jobs:
           TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
           TEST_BROWSER: ${{ github.event.inputs.TEST_BROWSER }}
       - name: Get environments
-        run: printenv
+        run: | 
+          printenv | grep ALLURE_
+          printenv | grep GITHUB_
       - name: List results
         run: ls -la ${ALLURE_RESULTS}
