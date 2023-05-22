@@ -16,13 +16,18 @@ import static io.qameta.allure.Allure.step;
      */
 
     @Test
-        @DisplayName("Some test")
+    @AllureId("183369")
+    @DisplayName("Some test")
         @Description(useJavaDoc = true)
         public void test1667306661111() {
             step("some step name https://www");
             step("some step name www without https");
             step("* var serviceId1=\"temporaryRedirectWith www\"");
-            step(" temporaryRedirectWith www\n ");
+        step("step sleep 60", () -> {
+            Thread.sleep(60000);
+            step("sub step");
+        });
+        step(" temporaryRedirectWith www\n ");
         }
 
     @Test
@@ -35,19 +40,12 @@ import static io.qameta.allure.Allure.step;
         step("step 3", () -> {
             step("sub step");
         });
-    }
-    @Test
-    @DisplayName("new test from IDE")
-    @Owner("nick@qameta.io")
-    @Feature("Issues")
-    void testFromIDE() {
-        step("step 1");
-        step("step 2");
-        step("step 3", () -> {
+        step("step sleep 60", () -> {
+            Thread.sleep(60000);
             step("sub step");
         });
-    }
 
+    }
 
 
 }

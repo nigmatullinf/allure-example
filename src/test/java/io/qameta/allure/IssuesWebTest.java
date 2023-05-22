@@ -15,29 +15,16 @@ import org.junit.jupiter.api.Test;
 @Feature("Issues")
 public class IssuesWebTest {
 
-    private static final String OWNER = "allure-framework";
+    private static final String OWNER = "allure-framework, not-allure-framework";
     private static final String REPO = "allure2";
 
-    private static final String ISSUE_TITLE = "Some issue title here";
+    private static final String ISSUE_TITLE = "Some issue, title here";
 
     private final WebSteps steps = new WebSteps();
 
     @BeforeEach
     public void startDriver() {
         steps.startDriver();
-    }
-
-    @Test
-    @TM4J("AE-T3")
-    @Microservice("Billing")
-    @Story("Create new issue")
-    @JiraIssues({@JiraIssue("AE-2")})
-    @Tags({@Tag("web"), @Tag("critical3")})
-    @DisplayName("Creating new issue authorized user")
-    public void shouldCreateIssue() {
-        steps.openIssuesPage(OWNER, REPO);
-        steps.createIssueWithTitle(ISSUE_TITLE);
-        steps.shouldSeeIssueWithTitle(ISSUE_TITLE);
     }
 
     @Test

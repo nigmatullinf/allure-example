@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 @Feature("Issues")
 public class IssuesRestTest {
 
-    private static final String OWNER = "allure-framework";
+    private static final String OWNER = "allure-framework, not-allure-framework";
     private static final String REPO = "allure2";
 
     private final RestSteps steps = new RestSteps();
@@ -20,8 +20,9 @@ public class IssuesRestTest {
     @Microservice("Billing")
     @Tags({@Tag("api"), @Tag("smoke4")})
     @ParameterizedTest(name = "Create issue via api {0}")
+    @AllureId("183335")
     @ValueSource(strings = {"First Note", "Second Note"})
-    public void shouldCreateUserNote(@Param(value = "Title") String title) {
+    public void shouldCreateUserNote(@Param(value = "Title,") String title) {
         steps.createIssueWithTitle(OWNER, REPO, title);
         steps.shouldSeeIssueWithTitle(OWNER, REPO, title);
     }
