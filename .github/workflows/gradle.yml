@@ -38,7 +38,7 @@ jobs:
       - name: install and configure allurectl
         uses: allure-framework/setup-allurectl@v1
         with:
-          allure-endpoint: https://testing.allure.aws.qameta.in
+          allure-endpoint: https://innopolis.qatools.cloud
           allure-token: ${{ secrets.ALLURE_TOKEN }}
           allure-project-id: ${{ secrets.ALLURE_PROJECT_ID }}
       - name: Build with Gradle
