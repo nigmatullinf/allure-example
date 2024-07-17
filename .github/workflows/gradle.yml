@@ -27,7 +27,7 @@ env:
   ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
 
 jobs:
-  all-tests:
+  all-tests-all-tests-all-tests-all-tests-all-tests-all-tests-all-tests-all-tests-all-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
