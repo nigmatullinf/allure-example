@@ -47,6 +47,7 @@ public class PullRequestsWebTest {
     @Story("Close existing pull request")
     @Tags({@Tag("web"), @Tag("regress4")})
     @DisplayName("Deleting existing issue for authorized user")
+    @Layer("Autotest layer fayl")
     public void shouldClosePullRequest() {
         steps.openPullRequestsPage(OWNER, REPO);
         steps.createPullRequestFromBranch(BRANCH);
