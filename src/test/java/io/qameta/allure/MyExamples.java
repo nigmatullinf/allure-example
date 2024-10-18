@@ -20,7 +20,7 @@ import static io.qameta.allure.Allure.step;
     @DisplayName("Some test")
         @Description(useJavaDoc = true)
         public void test1667306661111() {
-            step("some step name https://www");
+            step("test fff some step name https://www");
             step("some step name www without https");
             step("* var serviceId1=\"temporaryRedirectWith www\"");
         step("step sleep 60", () -> {
