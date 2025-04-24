@@ -4,6 +4,10 @@ on:
   push:
   workflow_dispatch:
     inputs:
+      TEST_ENVIRONMENT:
+        description: "Test environment (e.g., staging, prod)"
+        required: false
+        default: staging
       TEST_ENDPOINT:
         description: "Endpoint for tests"
         required: true
@@ -23,36 +27,4 @@ env:
   ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
   ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
   ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
-  ALLURE_RESULTS: "build/allure-results"
-  ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
-
-jobs:
-  all-tests-all-tests-all-tests-all-tests-all-tests-all-tests-all-tests-all-tests-all-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-      - name: install and configure allurectl
-        uses: allure-framework/setup-allurectl@v1
-        with:
-          allure-endpoint: ${{ secrets.ALLURE_ENDPOINT }}
-          allure-token: ${{ secrets.ALLURE_TOKEN }}
-          allure-project-id: ${{ secrets.ALLURE_PROJECT_ID }}
-      - name: Build with Gradle
-        run: | 
-          allurectl watch -- ./gradlew clean test
-          export $( allurectl job-run env)
-          printenv | grep TEST_
-          printenv | grep ALLURE_
-        env:
-          TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
-          TEST_BROWSER: ${{ github.event.inputs.TEST_BROWSER }}
-      - name: Get ALLURE_ environments just to check
-        run: | 
-          printenv | grep ALLURE_
-      - name: Get GITHUB_ environments just to check
-        run: | 
-          printenv | grep GITHUB_
+  ALLURE_RESULTS: "build_
