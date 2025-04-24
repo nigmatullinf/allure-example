@@ -49,7 +49,7 @@ jobs:
           printenv | grep ALLURE_
         env:
           TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
-          TEST_BROWSER: ${{ github.event.inputs.TEST_BROWSER }}
+          TEST_BROWSER: "chrome"
       - name: Get ALLURE_ environments just to check
         run: | 
           printenv | grep ALLURE_
