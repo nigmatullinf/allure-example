@@ -42,7 +42,7 @@ public class PullRequestsWebTest {
 
     @Test
     @TM4J("AE-T7")
-    @AllureId("24")
+    @AllureId("25")
     @JiraIssue("AE-2")
     @Microservice("Repository")
     @Story("Close existing pull request")
