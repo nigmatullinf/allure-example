@@ -78,4 +78,21 @@ import static io.qameta.allure.Allure.step;
         });
     }
 
+    @Test
+    @DisplayName("Bug test3")
+    @Owner("daniil@qameta.io")
+    @Feature("Issues bugs")
+    void testFromTestops4() {
+        step("lolы");
+        step("kekы");
+        step("4eburekы", () -> {
+            step("sub step");
+        });
+        step("step sleep 60", () -> {
+            Thread.sleep(60000);
+            step("sub step");
+        });
+    }
+
+
 }
