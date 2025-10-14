@@ -45,6 +45,27 @@ import static io.qameta.allure.Allure.step;
             step("sub step");
         });
 
+        
+
+    }
+
+    @Test
+    @DisplayName("Bug test")
+    @Owner("daniil@qameta.io")
+    @Feature("Issues")
+    void testFromTestops2() {
+        step("step 111");
+        step("step 2222");
+        step("step 3333", () -> {
+            step("sub step");
+        });
+        step("step sleep 60", () -> {
+            Thread.sleep(60000);
+            step("sub step");
+        });
+
+        
+
     }
 
 
