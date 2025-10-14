@@ -63,7 +63,7 @@ import static io.qameta.allure.Allure.step;
     }
 
     @Test
-    @DisplayName("Bug test")
+    @DisplayName("Bug test2")
     @Owner("daniil@qameta.io")
     @Feature("Issues bugs")
     void testFromTestops3() {
