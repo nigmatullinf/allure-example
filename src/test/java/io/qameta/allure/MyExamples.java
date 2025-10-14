@@ -33,7 +33,7 @@ import static io.qameta.allure.Allure.step;
     @Test
     @DisplayName("new test")
     @Owner("daniil@qameta.io")
-    @Feature("Issues bug")
+    @Feature("Issues bug тест")
     void testFromTestops() {
         step("step 1");
         step("step 2");
