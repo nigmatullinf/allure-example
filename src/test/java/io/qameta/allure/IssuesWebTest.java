@@ -20,7 +20,7 @@ public class IssuesWebTest {
 
     private static final String ISSUE_TITLE = "Some issue, title here";
 
-    private final WebSteps steps = new WebSteps();
+    private final PlaywrightSteps steps = new PlaywrightSteps();
 
     @BeforeEach
     public void startDriver() {

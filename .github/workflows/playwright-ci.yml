@@ -1,0 +1,92 @@
+name: Playwright Tests with Tracing
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Install Playwright Browsers
+      run: |
+        ./gradlew playwrightInstall
+        
+    - name: Run Playwright tests
+      run: |
+        ./gradlew test --info
+      env:
+        PLAYWRIGHT_TRACING: true
+        PLAYWRIGHT_TRACING_DIR: build/playwright-traces
+        PLAYWRIGHT_SCREENSHOTS: true
+        PLAYWRIGHT_SNAPSHOTS: true
+        PLAYWRIGHT_SOURCES: true
+        
+    - name: Generate Allure Report
+      run: |
+        ./gradlew allureReport
+        
+    - name: Upload Playwright traces
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-traces
+        path: build/playwright-traces/
+        retention-days: 30
+        
+    - name: Upload Playwright videos
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-videos
+        path: build/playwright-videos/
+        retention-days: 30
+        
+    - name: Upload Playwright report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: build/playwright-report/
+        retention-days: 30
+        
+    - name: Upload Allure results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: allure-results
+        path: build/allure-results/
+        retention-days: 30
+        
+    - name: Deploy Allure Report
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        allure_results: build/allure-results
+        allure_history: build/allure-history
+        gh_pages: gh-pages
+        allure_report_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        allure_history_url: ${{ github.server_url }}/${{ github.repository }}
+        commit_message: Deploy allure report for ${{ github.sha }}
+        keep_reports: 20
+        gh_token: ${{ secrets.GITHUB_TOKEN }}

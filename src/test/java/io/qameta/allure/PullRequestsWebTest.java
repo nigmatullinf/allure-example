@@ -20,7 +20,7 @@ public class PullRequestsWebTest {
 
     private static final String BRANCH = "new-feature";
 
-    private final WebSteps steps = new WebSteps();
+    private final PlaywrightSteps steps = new PlaywrightSteps();
 
     @BeforeEach
     public void startDriver() {
