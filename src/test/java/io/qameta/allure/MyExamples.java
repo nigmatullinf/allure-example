@@ -95,7 +95,7 @@ import static io.qameta.allure.Allure.step;
     }
 
     @Test
-    @AllureId("21")
+    @AllureId("13")
     @DisplayName("Bug test3")
     @Owner("daniil@qameta.io")
     @Feature("Issues bugs")
