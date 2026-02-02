@@ -18,6 +18,9 @@ on:
       ALLURE_USERNAME:
         description: "ALLURE_USERNAME service parameter. Leave blank"
         required: false
+      BAMBOO_PLAN_KEY:
+        description: "Bamboo plan key (e.g., PROJ-PLAN). Leave blank to use secret."
+        required: false
 
 env:
   ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
@@ -25,6 +28,9 @@ env:
   ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
   ALLURE_RESULTS: "build/allure-results"
   ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
+  BAMBOO_URL: ${{ secrets.BAMBOO_URL }}
+  BAMBOO_TOKEN: ${{ secrets.BAMBOO_TOKEN }}
+  BAMBOO_PLAN_KEY: ${{ github.event.inputs.BAMBOO_PLAN_KEY || secrets.BAMBOO_PLAN_KEY }}
 
 jobs:
   all-tests-all-tests-all-tests-all-tests-all-tests-all-tests-all-tests-all-tests-all-tests:
@@ -56,3 +62,13 @@ jobs:
       - name: Get GITHUB_ environments just to check
         run: | 
           printenv | grep GITHUB_
+      - name: Trigger Bamboo build
+        if: ${{ env.BAMBOO_URL != '' && env.BAMBOO_TOKEN != '' && env.BAMBOO_PLAN_KEY != '' }}
+        run: |
+          set -euo pipefail
+          curl -sS -X POST \
+            -H "Authorization: Bearer ${BAMBOO_TOKEN}" \
+            -H "Accept: application/json" \
+            "${BAMBOO_URL}/rest/api/latest/queue/${BAMBOO_PLAN_KEY}" \
+            -d "bamboo.variable.git_commit=${GITHUB_SHA}" \
+            -d "bamboo.variable.git_branch=${GITHUB_REF_NAME}"
