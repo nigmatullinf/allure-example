@@ -1,0 +1,36 @@
+name: bamboo-webhook
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  BAMBOO_WEBHOOK_URL: ${{ secrets.BAMBOO_WEBHOOK_URL }}
+  BAMBOO_TOKEN: ${{ secrets.BAMBOO_TOKEN }}
+
+jobs:
+  notify-bamboo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send webhook to Bamboo
+        if: ${{ env.BAMBOO_WEBHOOK_URL != '' }}
+        run: |
+          set -euo pipefail
+          payload=$(cat <<'EOF'
+          {
+            "repository": "${GITHUB_REPOSITORY}",
+            "ref": "${GITHUB_REF}",
+            "sha": "${GITHUB_SHA}",
+            "event": "push"
+          }
+          EOF
+          )
+          auth_header=()
+          if [ -n "${BAMBOO_TOKEN}" ]; then
+            auth_header=(-H "Authorization: Bearer ${BAMBOO_TOKEN}")
+          fi
+          curl -sS -X POST \
+            -H "Content-Type: application/json" \
+            "${auth_header[@]}" \
+            -d "${payload}" \
+            "${BAMBOO_WEBHOOK_URL}"
