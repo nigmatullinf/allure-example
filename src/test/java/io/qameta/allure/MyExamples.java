@@ -16,7 +16,7 @@ import static io.qameta.allure.Allure.step;
      */
 
     @Test
-    @AllureId("382131")
+    @AllureId("5")
     @DisplayName("Some test")
         @Description(useJavaDoc = true)
         public void test1667306661111() {
