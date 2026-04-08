@@ -10,15 +10,15 @@ import org.junit.jupiter.api.Test;
 /**
  * @author eroshenkoam (Artem Eroshenko).
  */
-@Layer("web")
-@Owner("eroshenkoam")
-@Feature("Issues")
-public class IssuesWebTest {
+@Layer("API tests")
+@Owner("testuser")
+@Feature("Bugs")
+public class IssuesTest {
 
-    private static final String OWNER = "allure-framework, not-allure-framework";
-    private static final String REPO = "allure2";
+    private static final String OWNER = "test-owner";
+    private static final String REPO = "test-repo";
 
-    private static final String ISSUE_TITLE = "Some issue, title here";
+    private static final String ISSUE_TITLE = "Test issue title";
 
     private final WebSteps steps = new WebSteps();
 
@@ -28,13 +28,13 @@ public class IssuesWebTest {
     }
 
     @Test
-    @AllureId("21")
-    @TM4J("AE-T4")
-    @Microservice("Repository")
-    @Story("Create new issue")
-    @Tags({@Tag("web"), @Tag("regress4")})
-    @JiraIssues({@JiraIssue("AE-1")})
-    @DisplayName("Adding note to advertisement")
+    @AllureId("31")
+    @TM4J("AE-T6")
+    @Microservice("API")
+    @Story("Edit issue")
+    @Tags({@Tag("WEB"), @Tag("smoke")})
+    @JiraIssues({@JiraIssue("AE-3")})
+    @DisplayName("Editing issue details")
     public void shouldAddLabelToIssue() {
         steps.openIssuesPage(OWNER, REPO);
         steps.createIssueWithTitle(ISSUE_TITLE);
