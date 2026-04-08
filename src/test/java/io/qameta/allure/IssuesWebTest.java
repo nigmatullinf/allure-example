@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author eroshenkoam (Artem Eroshenko).
  */
+@AllureId("21")
 @Layer("web")
 @Owner("eroshenkoam")
 @Feature("Issues")
