@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 /**
  * @author eroshenkoam (Artem Eroshenko).
  */
-@AllureId("21")
 @Layer("web")
 @Owner("eroshenkoam")
 @Feature("Issues")
@@ -29,6 +28,7 @@ public class IssuesWebTest {
     }
 
     @Test
+    @AllureId("21")
     @TM4J("AE-T4")
     @Microservice("Repository")
     @Story("Create new issue")
