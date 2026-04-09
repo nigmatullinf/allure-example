@@ -28,7 +28,7 @@ public class IssuesTest {
     }
 
     @Test
-    @AllureId("1")
+    @AllureId("21")
     @TM4J("AE-T6")
     @Microservice("API")
     @Story("Edit issue")
