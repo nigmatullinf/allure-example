@@ -28,6 +28,7 @@ public class IssuesTest {
     }
 
     @Test
+    @Flaky
     @TM4J("AE-T6")
     @Microservice("API")
     @Story("Edit issue")
