@@ -34,7 +34,7 @@ public class IssuesTest {
     @Story("Edit issue")
     @Tags({@Tag("WEB"), @Tag("smoke")})
     @JiraIssues({@JiraIssue("AE-3")})
-    @DisplayName("Editing issue details")
+    @DisplayName("Editing issue details Test 1")
     public void shouldAddLabelToIssue() {
         steps.openIssuesPage(OWNER, REPO);
         steps.createIssueWithTitle(ISSUE_TITLE);
