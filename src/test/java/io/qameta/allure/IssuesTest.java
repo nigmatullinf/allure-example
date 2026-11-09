@@ -28,6 +28,7 @@ public class IssuesTest {
     }
 
     @Test
+    @AllureId("20")
     @Flaky
     @TM4J("AE-T6")
     @Microservice("API")
